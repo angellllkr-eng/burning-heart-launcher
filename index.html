@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" class="notranslate" translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>5 Burning Heart | Alphawin-style Game Launch Demo</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --accent: #e63946; /* burning heart red */
+      --gold: #ffd700;
+      --text: #e8e8e8;
+      --muted: #888;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-image: radial-gradient(ellipse at top, #1a0a0a 0%, #0a0a0a 70%);
+    }
+    .container {
+      max-width: 680px;
+      width: 100%;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid #2a2a2a;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(230, 57, 70, 0.15);
+    }
+    .header {
+      background: linear-gradient(135deg, #1a0505, #0d0d0d);
+      padding: 28px 24px 20px;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+      position: relative;
+    }
+    .header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent), var(--gold), var(--accent), transparent);
+    }
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    h1 span { color: var(--accent); }
+    .sub {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .badge {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 12px;
+      background: rgba(230,57,70,0.15);
+      color: var(--accent);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .body {
+      padding: 28px 24px;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .info-item {
+      background: #1a1a1a;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #252525;
+    }
+    .info-item .label {
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+    .info-item .value {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .config-box {
+      background: #0d0d0d;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 16px;
+      font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      color: #a8d5a2;
+      max-height: 180px;
+      overflow-y: auto;
+      margin-bottom: 24px;
+      white-space: pre-wrap;
+    }
+    .config-box .key { color: #7dd3fc; }
+    .config-box .str { color: #fbbf24; }
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px 24px;
+      border-radius: 12px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, #e63946, #c1121f);
+      color: white;
+      box-shadow: 0 8px 24px rgba(230, 57, 70, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(230, 57, 70, 0.45);
+    }
+    .btn-secondary {
+      background: #1f1f1f;
+      color: var(--text);
+      border: 1px solid #333;
+    }
+    .btn-secondary:hover {
+      background: #2a2a2a;
+      border-color: #444;
+    }
+    .note {
+      margin-top: 20px;
+      padding: 14px;
+      background: rgba(255, 215, 0, 0.06);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      border-radius: 10px;
+      font-size: 0.8rem;
+      color: #ccc;
+      line-height: 1.45;
+    }
+    .footer {
+      text-align: center;
+      padding: 16px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid #222;
+    }
+    @media (max-width: 480px) {
+      .info-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>5 <span>Burning Heart</span></h1>
+      <div class="sub">EGT Interactive · Classic 5-reel fruit slot</div>
+      <div class="badge">Demo Launcher · AWBG style</div>
+    </div>
+
+    <div class="body">
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Provider</div>
+          <div class="value">EGT Digital / Amusnet</div>
+        </div>
+        <div class="info-item">
+          <div class="label">RTP</div>
+          <div class="value">~95.94%</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Reels / Lines</div>
+          <div class="value">5 × 3 · 5 fixed</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Max Win</div>
+          <div class="value">up to 5000×</div>
+        </div>
+      </div>
+
+      <div class="config-box" id="config">Object.freeze({
+  RAND_NAME_LONG: <span class="str">'Alphawin'</span>,
+  RAND_NAME_SHORT: <span class="str">'Alphawin'</span>,
+  BUSINESS_UNIT: <span class="str">'AWBG'</span>,
+  DEFAULT_LANG: <span class="str">'bg'</span>,
+  DEFAULT_CURR: <span class="str">'bgn'</span>,
+  DEFAULT_THEME_SKIN: <span class="str">'Dark'</span>,
+  GAME: <span class="str">'egt-interactive/5-Burning-Heart'</span>,
+  LAUNCH_PATH: <span class="str">'/game-launch/default_lobby/…'</span>
+})</div>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="https://egt-digital.com/bg/game/5-burning-heart-2/" target="_blank" rel="noopener">
+          ▶ Play Official EGT Demo
+        </a>
+        <a class="btn btn-secondary" href="https://jocpacanele.ro/jocuri-cu-pacanele/5-burning-heart-gratis/" target="_blank" rel="noopener">
+          Alternate free demo (RO)
+        </a>
+        <a class="btn btn-secondary" href="https://slotcatalog.com/en/slots/5-burning-heart-egt-digital" target="_blank" rel="noopener">
+          SlotCatalog demo page
+        </a>
+      </div>
+
+      <div class="note">
+        <strong>Note:</strong> This is a fan-made launcher page styled after the Alphawin.bg game-launch source you inspected.
+        It does <em>not</em> host the real game assets or any real-money gambling. 
+        The buttons open public free demo pages from the provider or review sites.
+        Always play responsibly. 18+ only.
+      </div>
+    </div>
+
+    <div class="footer">
+      Personal demo launcher · Not affiliated with Alphawin, EGT Digital or Alphabet Gaming
+    </div>
+  </div>
+
+  <script>
+    // Tiny fake "preloader" feel
+    document.body.style.opacity = "0";
+    setTimeout(() => {
+      document.body.style.transition = "opacity 0.4s ease";
+      document.body.style.opacity = "1";
+    }, 80);
+  </script>
+</body>
+</html>
