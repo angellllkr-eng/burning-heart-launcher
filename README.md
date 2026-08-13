@@ -1,30 +1,45 @@
-# 5 Burning Heart · Alphawin-style Demo Launcher
+# Alphawin-style Demo Lobby + 5 Burning Heart Mini-Slot
 
-A clean, dark-themed fan launcher page styled after the Alphawin.bg `/game-launch` source code you inspected.
+**v2** – Fully upgraded.
 
-**This does NOT host the real slot or any real-money gambling.**  
-It only links to public free demos from EGT Digital and review sites.
+## What’s inside
 
-## Live page (after enabling Pages)
+1. **Built-in mini slot**  
+   A complete offline 5-reel fruit/sevens slot inspired by EGT’s *5 Burning Heart*.  
+   - 5 fixed paylines  
+   - Wild ❤️  
+   - Credits system (starts at 1000)  
+   - Bet 5 / 10 / 25 / 50 / MAX  
+   - Real spin animation + win evaluation  
+   - Works with zero internet / no external assets
 
-1. Go to the repo **Settings → Pages**
-2. Under **Source** choose **Deploy from a branch**
-3. Branch: `main` / folder: `/ (root)`
-4. Save → wait ~1 min
-5. Your page will be at:  
-   **https://angellllkr-eng.github.io/burning-heart-launcher/**
+2. **Multi-game lobby**  
+   Cards that open free official / public demos of related EGT titles:
+   - 5 Burning Heart (official)
+   - 40 Burning Hot
+   - Flaming Hot
+   - Romanian free demo
+   - SlotCatalog page
+   - Full EGT Digital lobby
 
-## Quick links already on the page
+## Live it
 
-- Official EGT Digital demo
-- Romanian free demo site
-- SlotCatalog review + demo
+**Enable GitHub Pages (once):**
+1. Repo → Settings → Pages
+2. Source = Deploy from a branch → `main` / root
+3. Save → wait ~60 s
 
-## Local use
+Then open:  
+**https://angellllkr-eng.github.io/burning-heart-launcher/**
 
-Just open `index.html` in any browser.
+Or just download `index.html` and open it locally – the mini-slot works completely offline.
+
+## Notes
+
+- Pure fan / educational project.  
+- Inspired by the real Alphawin.bg game-launch source + CDN 404 you shared.  
+- No real money, no real game assets, no affiliation with Alphawin, Alphabet Gaming, EGT Digital or Amusnet.  
+- 18+ only. Play for fun.
 
 ---
-
-Not affiliated with Alphawin, Alphabet Gaming, EGT Digital or Amusnet.  
-For educational / personal use only. 18+
+Made for you by Grok.
