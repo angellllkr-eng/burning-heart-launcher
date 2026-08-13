@@ -5,15 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000000">
   <meta name="mobile-web-app-capable" content="yes">
-  <title>5 Burning Heart | Alphawin-style Game Launch Demo</title>
+  <title>Alphawin-style Lobby · 5 Burning Heart + Mini Slot</title>
   <style>
     :root {
-      --bg: #0a0a0a;
-      --card: #141414;
-      --accent: #e63946; /* burning heart red */
+      --bg: #070707;
+      --card: #121212;
+      --accent: #e63946;
       --gold: #ffd700;
-      --text: #e8e8e8;
+      --text: #f0f0f0;
       --muted: #888;
+      --green: #22c55e;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -21,231 +22,494 @@
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      background-image: radial-gradient(ellipse at top, #1a0a0a 0%, #070707 70%);
+      padding: 16px;
+    }
+    .topbar {
+      max-width: 900px;
+      margin: 0 auto 20px;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      padding: 20px;
-      background-image: radial-gradient(ellipse at top, #1a0a0a 0%, #0a0a0a 70%);
+      padding: 12px 16px;
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid #222;
+    }
+    .brand { font-weight: 800; font-size: 1.15rem; }
+    .brand span { color: var(--accent); }
+    .credits {
+      background: #1a1a1a;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 700;
+      color: var(--gold);
+      border: 1px solid #333;
     }
     .container {
-      max-width: 680px;
-      width: 100%;
-      background: var(--card);
-      border-radius: 16px;
-      border: 1px solid #2a2a2a;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(230, 57, 70, 0.15);
+      max-width: 900px;
+      margin: 0 auto;
     }
-    .header {
-      background: linear-gradient(135deg, #1a0505, #0d0d0d);
-      padding: 28px 24px 20px;
-      text-align: center;
-      border-bottom: 1px solid #2a2a2a;
-      position: relative;
-    }
-    .header::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, transparent, var(--accent), var(--gold), var(--accent), transparent);
-    }
-    h1 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 6px;
-    }
-    h1 span { color: var(--accent); }
-    .sub {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-    .badge {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 4px 12px;
-      background: rgba(230,57,70,0.15);
-      color: var(--accent);
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
+    .section-title {
+      font-size: 0.85rem;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin: 24px 0 12px;
+      padding-left: 4px;
     }
-    .body {
-      padding: 28px 24px;
-    }
-    .info-grid {
+    .lobby {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
     }
-    .info-item {
-      background: #1a1a1a;
-      padding: 12px 14px;
-      border-radius: 10px;
+    .game-card {
+      background: var(--card);
       border: 1px solid #252525;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
     }
-    .info-item .label {
-      font-size: 0.7rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      margin-bottom: 4px;
+    .game-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 10px 30px rgba(230,57,70,0.2);
     }
-    .info-item .value {
-      font-size: 0.95rem;
-      font-weight: 600;
-    }
-    .config-box {
-      background: #0d0d0d;
-      border: 1px solid #2a2a2a;
-      border-radius: 10px;
-      padding: 16px;
-      font-family: ui-monospace, "Cascadia Code", "Fira Code", monospace;
-      font-size: 0.75rem;
-      line-height: 1.5;
-      color: #a8d5a2;
-      max-height: 180px;
-      overflow-y: auto;
-      margin-bottom: 24px;
-      white-space: pre-wrap;
-    }
-    .config-box .key { color: #7dd3fc; }
-    .config-box .str { color: #fbbf24; }
-    .actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .btn {
+    .game-thumb {
+      height: 110px;
+      background: linear-gradient(135deg, #2a0a0a, #1a1a1a);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      padding: 16px 24px;
-      border-radius: 12px;
-      font-size: 1.05rem;
+      font-size: 2.8rem;
+      position: relative;
+    }
+    .game-thumb .hot {
+      position: absolute;
+      top: 8px; right: 8px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.65rem;
       font-weight: 700;
-      text-decoration: none;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+    .game-info {
+      padding: 12px 14px;
+    }
+    .game-name { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+    .game-meta { font-size: 0.75rem; color: var(--muted); }
+    .slot-panel {
+      background: var(--card);
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 8px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    }
+    .slot-header {
+      background: linear-gradient(90deg, #1a0505, #0d0d0d);
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .slot-header h2 { font-size: 1.1rem; }
+    .slot-header h2 span { color: var(--accent); }
+    .slot-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    #reels {
+      display: flex;
+      gap: 8px;
+      background: #0a0a0a;
+      padding: 12px;
+      border-radius: 12px;
+      border: 2px solid #333;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+    }
+    .reel {
+      width: 72px;
+      height: 216px;
+      overflow: hidden;
+      background: #111;
+      border-radius: 8px;
+      position: relative;
+      border: 1px solid #333;
+    }
+    .reel-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: top 0.6s cubic-bezier(0.2, 0.8, 0.3, 1);
+    }
+    .symbol {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      border-bottom: 1px solid #222;
+      background: linear-gradient(180deg, #1a1a1a, #0f0f0f);
+    }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      width: 100%;
+      max-width: 420px;
+    }
+    .btn {
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
       border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
-    .btn-primary {
-      background: linear-gradient(135deg, #e63946, #c1121f);
+    .btn-spin {
+      background: linear-gradient(135deg, var(--accent), #c1121f);
       color: white;
-      box-shadow: 0 8px 24px rgba(230, 57, 70, 0.35);
+      flex: 1;
+      min-width: 140px;
+      box-shadow: 0 6px 20px rgba(230,57,70,0.35);
     }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(230, 57, 70, 0.45);
-    }
-    .btn-secondary {
+    .btn-spin:hover:not(:disabled) { transform: translateY(-1px); }
+    .btn-spin:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-bet {
       background: #1f1f1f;
       color: var(--text);
       border: 1px solid #333;
+      min-width: 70px;
     }
-    .btn-secondary:hover {
-      background: #2a2a2a;
-      border-color: #444;
+    .btn-bet.active { border-color: var(--gold); color: var(--gold); }
+    .btn-max {
+      background: #1f1f1f;
+      color: var(--gold);
+      border: 1px solid #444;
     }
+    .status {
+      min-height: 28px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--gold);
+      text-align: center;
+    }
+    .win-flash { animation: flash 0.5s ease; color: var(--green); }
+    @keyframes flash {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.4; transform: scale(1.05); }
+    }
+    .paytable {
+      width: 100%;
+      max-width: 420px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      background: #0d0d0d;
+      border-radius: 10px;
+      padding: 12px 14px;
+      border: 1px solid #222;
+    }
+    .paytable strong { color: var(--text); }
     .note {
       margin-top: 20px;
       padding: 14px;
-      background: rgba(255, 215, 0, 0.06);
-      border: 1px solid rgba(255, 215, 0, 0.2);
+      background: rgba(255,215,0,0.05);
+      border: 1px solid rgba(255,215,0,0.15);
       border-radius: 10px;
-      font-size: 0.8rem;
-      color: #ccc;
+      font-size: 0.78rem;
+      color: #bbb;
       line-height: 1.45;
     }
     .footer {
       text-align: center;
+      margin-top: 28px;
       padding: 16px;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--muted);
-      border-top: 1px solid #222;
     }
-    @media (max-width: 480px) {
-      .info-grid { grid-template-columns: 1fr; }
-      h1 { font-size: 1.35rem; }
+    @media (max-width: 520px) {
+      .reel { width: 58px; height: 174px; }
+      .symbol { width: 58px; height: 58px; font-size: 1.8rem; }
+      #reels { gap: 5px; padding: 8px; }
     }
   </style>
 </head>
 <body>
+  <div class="topbar">
+    <div class="brand">Alpha<span>win</span> · Demo Lobby</div>
+    <div class="credits" id="credits">Credits: 1000</div>
+  </div>
+
   <div class="container">
-    <div class="header">
-      <h1>5 <span>Burning Heart</span></h1>
-      <div class="sub">EGT Interactive · Classic 5-reel fruit slot</div>
-      <div class="badge">Demo Launcher · AWBG style</div>
+    <div class="section-title">Built-in Mini Slot (works offline)</div>
+    <div class="slot-panel">
+      <div class="slot-header">
+        <h2>5 <span>Burning Heart</span> Mini</h2>
+        <div style="font-size:0.8rem;color:var(--muted)">EGT-style · Fun only</div>
+      </div>
+      <div class="slot-body">
+        <div id="reels">
+          <div class="reel"><div class="reel-inner" id="r0"></div></div>
+          <div class="reel"><div class="reel-inner" id="r1"></div></div>
+          <div class="reel"><div class="reel-inner" id="r2"></div></div>
+          <div class="reel"><div class="reel-inner" id="r3"></div></div>
+          <div class="reel"><div class="reel-inner" id="r4"></div></div>
+        </div>
+        <div class="status" id="status">Place your bet & spin!</div>
+        <div class="controls">
+          <button class="btn btn-bet" data-bet="5">5</button>
+          <button class="btn btn-bet active" data-bet="10">10</button>
+          <button class="btn btn-bet" data-bet="25">25</button>
+          <button class="btn btn-bet" data-bet="50">50</button>
+          <button class="btn btn-max" id="btnMax">MAX</button>
+          <button class="btn btn-spin" id="btnSpin">▶ SPIN</button>
+        </div>
+        <div class="paytable">
+          <strong>Paytable (per line):</strong> ❤️ Wild · 7️⃣ 50× · 🍇/🍉 20× · 🔔 10× · 🍊/🍋/🍒 5× · 3× of a kind min. 5 fixed lines.
+        </div>
+      </div>
     </div>
 
-    <div class="body">
-      <div class="info-grid">
-        <div class="info-item">
-          <div class="label">Provider</div>
-          <div class="value">EGT Digital / Amusnet</div>
+    <div class="section-title">More free demos (external)</div>
+    <div class="lobby">
+      <a class="game-card" href="https://egt-digital.com/bg/game/5-burning-heart-2/" target="_blank" rel="noopener">
+        <div class="game-thumb">❤️ <span class="hot">HOT</span></div>
+        <div class="game-info">
+          <div class="game-name">5 Burning Heart</div>
+          <div class="game-meta">EGT · Official demo</div>
         </div>
-        <div class="info-item">
-          <div class="label">RTP</div>
-          <div class="value">~95.94%</div>
+      </a>
+      <a class="game-card" href="https://egt-digital.com/game/40-burning-hot/" target="_blank" rel="noopener">
+        <div class="game-thumb">🔥</div>
+        <div class="game-info">
+          <div class="game-name">40 Burning Hot</div>
+          <div class="game-meta">EGT · Classic</div>
         </div>
-        <div class="info-item">
-          <div class="label">Reels / Lines</div>
-          <div class="value">5 × 3 · 5 fixed</div>
+      </a>
+      <a class="game-card" href="https://egt-digital.com/game/flaming-hot/" target="_blank" rel="noopener">
+        <div class="game-thumb">🌶️</div>
+        <div class="game-info">
+          <div class="game-name">Flaming Hot</div>
+          <div class="game-meta">EGT · Fruit</div>
         </div>
-        <div class="info-item">
-          <div class="label">Max Win</div>
-          <div class="value">up to 5000×</div>
+      </a>
+      <a class="game-card" href="https://jocpacanele.ro/jocuri-cu-pacanele/5-burning-heart-gratis/" target="_blank" rel="noopener">
+        <div class="game-thumb">🎰</div>
+        <div class="game-info">
+          <div class="game-name">5 Burning Heart (RO)</div>
+          <div class="game-meta">Free demo site</div>
         </div>
-      </div>
+      </a>
+      <a class="game-card" href="https://slotcatalog.com/en/slots/5-burning-heart-egt-digital" target="_blank" rel="noopener">
+        <div class="game-thumb">📊</div>
+        <div class="game-info">
+          <div class="game-name">SlotCatalog</div>
+          <div class="game-meta">Review + demo</div>
+        </div>
+      </a>
+      <a class="game-card" href="https://egt-digital.com/" target="_blank" rel="noopener">
+        <div class="game-thumb">🎮</div>
+        <div class="game-info">
+          <div class="game-name">EGT Digital Lobby</div>
+          <div class="game-meta">All official demos</div>
+        </div>
+      </a>
+    </div>
 
-      <div class="config-box" id="config">Object.freeze({
-  RAND_NAME_LONG: <span class="str">'Alphawin'</span>,
-  RAND_NAME_SHORT: <span class="str">'Alphawin'</span>,
-  BUSINESS_UNIT: <span class="str">'AWBG'</span>,
-  DEFAULT_LANG: <span class="str">'bg'</span>,
-  DEFAULT_CURR: <span class="str">'bgn'</span>,
-  DEFAULT_THEME_SKIN: <span class="str">'Dark'</span>,
-  GAME: <span class="str">'egt-interactive/5-Burning-Heart'</span>,
-  LAUNCH_PATH: <span class="str">'/game-launch/default_lobby/…'</span>
-})</div>
-
-      <div class="actions">
-        <a class="btn btn-primary" href="https://egt-digital.com/bg/game/5-burning-heart-2/" target="_blank" rel="noopener">
-          ▶ Play Official EGT Demo
-        </a>
-        <a class="btn btn-secondary" href="https://jocpacanele.ro/jocuri-cu-pacanele/5-burning-heart-gratis/" target="_blank" rel="noopener">
-          Alternate free demo (RO)
-        </a>
-        <a class="btn btn-secondary" href="https://slotcatalog.com/en/slots/5-burning-heart-egt-digital" target="_blank" rel="noopener">
-          SlotCatalog demo page
-        </a>
-      </div>
-
-      <div class="note">
-        <strong>Note:</strong> This is a fan-made launcher page styled after the Alphawin.bg game-launch source you inspected.
-        It does <em>not</em> host the real game assets or any real-money gambling. 
-        The buttons open public free demo pages from the provider or review sites.
-        Always play responsibly. 18+ only.
-      </div>
+    <div class="note">
+      <strong>What this is:</strong> A personal fan-made demo lobby inspired by the Alphawin.bg source code you inspected (including the 404 CDN page). 
+      The mini slot above is 100% self-contained (no external assets) and runs offline. Real demos open official free pages. 
+      No real money, no affiliation with Alphawin / EGT Digital / Alphabet Gaming. 18+ only. Play for fun.
     </div>
 
     <div class="footer">
-      Personal demo launcher · Not affiliated with Alphawin, EGT Digital or Alphabet Gaming
+      Built for you · GitHub: angellllkr-eng/burning-heart-launcher · Not production software
     </div>
   </div>
 
   <script>
-    // Tiny fake "preloader" feel
-    document.body.style.opacity = "0";
-    setTimeout(() => {
-      document.body.style.transition = "opacity 0.4s ease";
-      document.body.style.opacity = "1";
-    }, 80);
+    const SYMBOLS = [
+      { id: 'heart', emoji: '❤️', pay: 0, wild: true },
+      { id: 'seven', emoji: '7️⃣', pay: 50 },
+      { id: 'grape', emoji: '🍇', pay: 20 },
+      { id: 'melon', emoji: '🍉', pay: 20 },
+      { id: 'bell',  emoji: '🔔', pay: 10 },
+      { id: 'orange',emoji: '🍊', pay: 5 },
+      { id: 'lemon', emoji: '🍋', pay: 5 },
+      { id: 'cherry',emoji: '🍒', pay: 5 }
+    ];
+
+    let credits = 1000;
+    let bet = 10;
+    let spinning = false;
+    const reelsCount = 5;
+    const stripLen = 30;
+
+    const strips = [];
+    for (let r = 0; r < reelsCount; r++) {
+      const strip = [];
+      for (let i = 0; i < stripLen; i++) {
+        const roll = Math.random();
+        let s;
+        if (roll < 0.08) s = SYMBOLS[0];
+        else if (roll < 0.18) s = SYMBOLS[1];
+        else if (roll < 0.35) s = SYMBOLS[2];
+        else if (roll < 0.52) s = SYMBOLS[3];
+        else if (roll < 0.68) s = SYMBOLS[4];
+        else if (roll < 0.80) s = SYMBOLS[5];
+        else if (roll < 0.90) s = SYMBOLS[6];
+        else s = SYMBOLS[7];
+        strip.push(s);
+      }
+      strips.push(strip);
+    }
+
+    function renderStrip(reelIdx) {
+      const el = document.getElementById('r' + reelIdx);
+      el.innerHTML = '';
+      strips[reelIdx].forEach(s => {
+        const d = document.createElement('div');
+        d.className = 'symbol';
+        d.textContent = s.emoji;
+        el.appendChild(d);
+      });
+    }
+
+    for (let i = 0; i < reelsCount; i++) renderStrip(i);
+
+    const positions = [10, 12, 8, 14, 9];
+    function setPosition(r, pos) {
+      const el = document.getElementById('r' + r);
+      const offset = -(pos * 72);
+      el.style.top = offset + 'px';
+      positions[r] = pos;
+    }
+    positions.forEach((p, i) => setPosition(i, p));
+
+    function updateCredits() {
+      document.getElementById('credits').textContent = 'Credits: ' + credits;
+    }
+
+    function getVisible(r) {
+      const start = positions[r] % stripLen;
+      const vis = [];
+      for (let i = 0; i < 3; i++) {
+        vis.push(strips[r][(start + i) % stripLen]);
+      }
+      return vis;
+    }
+
+    const lines = [
+      [1,1,1,1,1],
+      [0,0,0,0,0],
+      [2,2,2,2,2],
+      [0,1,2,1,0],
+      [2,1,0,1,2]
+    ];
+
+    function evaluate() {
+      let totalWin = 0;
+      const results = [];
+      for (let li = 0; li < lines.length; li++) {
+        const line = lines[li];
+        const symbols = line.map((row, reel) => getVisible(reel)[row]);
+        let first = symbols[0];
+        let count = 1;
+        for (let i = 1; i < 5; i++) {
+          const cur = symbols[i];
+          if (cur.wild || first.wild || cur.id === first.id) {
+            if (first.wild && !cur.wild) first = cur;
+            count++;
+          } else break;
+        }
+        if (count >= 3 && !first.wild) {
+          const pay = first.pay * (count === 3 ? 1 : count === 4 ? 3 : 10);
+          const lineWin = pay * (bet / 5);
+          totalWin += lineWin;
+          results.push({ line: li + 1, count, symbol: first.emoji, win: Math.floor(lineWin) });
+        }
+      }
+      return { totalWin: Math.floor(totalWin), results };
+    }
+
+    document.querySelectorAll('.btn-bet').forEach(b => {
+      b.addEventListener('click', () => {
+        if (spinning) return;
+        document.querySelectorAll('.btn-bet').forEach(x => x.classList.remove('active'));
+        b.classList.add('active');
+        bet = parseInt(b.dataset.bet);
+      });
+    });
+
+    document.getElementById('btnMax').addEventListener('click', () => {
+      if (spinning) return;
+      bet = 50;
+      document.querySelectorAll('.btn-bet').forEach(x => {
+        x.classList.toggle('active', parseInt(x.dataset.bet) === 50);
+      });
+    });
+
+    document.getElementById('btnSpin').addEventListener('click', () => {
+      if (spinning) return;
+      if (credits < bet) {
+        document.getElementById('status').textContent = 'Not enough credits!';
+        return;
+      }
+      spinning = true;
+      credits -= bet;
+      updateCredits();
+      document.getElementById('btnSpin').disabled = true;
+      document.getElementById('status').textContent = 'Spinning…';
+
+      const targets = [];
+      for (let r = 0; r < reelsCount; r++) {
+        const extra = 20 + Math.floor(Math.random() * 15);
+        const target = (positions[r] + extra) % stripLen;
+        targets.push(target);
+        const el = document.getElementById('r' + r);
+        el.style.transition = `top ${0.5 + r * 0.25}s cubic-bezier(0.15, 0.85, 0.3, 1)`;
+        setPosition(r, positions[r] + extra);
+      }
+
+      setTimeout(() => {
+        for (let r = 0; r < reelsCount; r++) {
+          setPosition(r, targets[r]);
+        }
+        const { totalWin, results } = evaluate();
+        if (totalWin > 0) {
+          credits += totalWin;
+          updateCredits();
+          const msg = results.map(r => `L${r.line}: ${r.count}×${r.symbol} = ${r.win}`).join(' · ');
+          const st = document.getElementById('status');
+          st.textContent = `🎉 WIN ${totalWin} credits!  ${msg}`;
+          st.classList.add('win-flash');
+          setTimeout(() => st.classList.remove('win-flash'), 600);
+        } else {
+          document.getElementById('status').textContent = 'No win this time. Try again!';
+        }
+        spinning = false;
+        document.getElementById('btnSpin').disabled = false;
+      }, 1800);
+    });
+
+    updateCredits();
   </script>
 </body>
 </html>
