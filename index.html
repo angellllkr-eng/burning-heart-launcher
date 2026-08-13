@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#0a0a0a">
-  <title>AlphaWin Demo Lobby · 5 Burning Heart Mini</title>
+  <title>AlphaWin Demo Lobby · 5 Burning Heart Mini · € FUN</title>
   <style>
     :root {
       --bg: #0a0a0a;
@@ -375,8 +375,8 @@
       <a href="#">Table</a>
     </nav>
     <div class="credits-box">
-      <span class="coin">🪙</span>
-      <span id="credits">1,000</span>
+      <span class="coin">€</span>
+      <span id="credits">1,000.00</span>
     </div>
   </header>
 
@@ -391,8 +391,8 @@
       <a class="side-item" href="#"><span class="icon">❤️</span> Favorites</a>
 
       <div class="side-balance">
-        <div class="label">Demo Balance</div>
-        <div class="amount" id="sideCredits">1,000</div>
+        <div class="label">Demo Balance (€)</div>
+        <div class="amount" id="sideCredits">€1,000.00</div>
         <div style="font-size:0.7rem;color:var(--muted)">FUN only · no real money</div>
       </div>
     </aside>
@@ -403,13 +403,13 @@
           <div class="tag">FEATURED GAME</div>
           <h1>5 <span>BURNING HEART</span> MINI</h1>
           <p>Classic fruit action with Burning Heart Wilds. 5 fixed lines · offline playable · pure fun demo.</p>
-          <button class="play-btn" id="btnSpin">▶ SPIN  ·  Bet <span id="betLabel">10</span></button>
+          <button class="play-btn" id="btnSpin">▶ SPIN  ·  Bet €<span id="betLabel">10</span></button>
           <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap;">
-            <button class="bet-btn" data-bet="5">5</button>
-            <button class="bet-btn active" data-bet="10">10</button>
-            <button class="bet-btn" data-bet="25">25</button>
-            <button class="bet-btn" data-bet="50">50</button>
-            <button class="bet-btn" data-bet="100">100</button>
+            <button class="bet-btn" data-bet="5">€5</button>
+            <button class="bet-btn active" data-bet="10">€10</button>
+            <button class="bet-btn" data-bet="25">€25</button>
+            <button class="bet-btn" data-bet="50">€50</button>
+            <button class="bet-btn" data-bet="100">€100</button>
           </div>
         </div>
 
@@ -475,8 +475,9 @@
       </div>
 
       <div class="footer-note">
-        Fan-made demo lobby inspired by Alphawin.bg source + CDN 404 you shared.<br>
-        Mini-slot is 100% offline · no real money · not affiliated with Alphawin / EGT Digital / Alphabet Gaming.<br>
+        Fan-made demo lobby with real € display (FUN money only).<br>
+        Inspired by Alphawin.bg source + CDN 404 you shared.<br>
+        Mini-slot is 100% offline · <strong>no real money</strong> · not affiliated with Alphawin / EGT Digital / Alphabet Gaming.<br>
         18+ only. Play for fun. · GitHub: angellllkr-eng/burning-heart-launcher
       </div>
     </main>
@@ -536,10 +537,10 @@
     positions.forEach((p,i) => setPos(i, p));
 
     function fmt(n) {
-      return n.toLocaleString('en-US');
+      return '€' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
     }
     function updateCredits() {
-      document.getElementById('credits').textContent = fmt(credits);
+      document.getElementById('credits').textContent = fmt(credits).replace('€','');
       document.getElementById('sideCredits').textContent = fmt(credits);
     }
 
@@ -593,7 +594,7 @@
     document.getElementById('btnSpin').addEventListener('click', () => {
       if (spinning) return;
       if (credits < bet) {
-        document.getElementById('status').textContent = 'Not enough credits 😅';
+        document.getElementById('status').textContent = 'Not enough € balance 😅';
         return;
       }
       spinning = true;
