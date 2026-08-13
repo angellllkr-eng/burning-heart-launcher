@@ -1,45 +1,27 @@
-# Alphawin-style Demo Lobby + 5 Burning Heart Mini-Slot
+# AlphaWin Demo Lobby · Real € display (FUN money)
 
-**v2** – Fully upgraded.
+**Instant working links (no setup needed):**
 
-## What’s inside
+### 1. Best preview (click & play right now)
+**https://htmlpreview.github.io/?https://github.com/angellllkr-eng/burning-heart-launcher/blob/main/index.html**
 
-1. **Built-in mini slot**  
-   A complete offline 5-reel fruit/sevens slot inspired by EGT’s *5 Burning Heart*.  
-   - 5 fixed paylines  
-   - Wild ❤️  
-   - Credits system (starts at 1000)  
-   - Bet 5 / 10 / 25 / 50 / MAX  
-   - Real spin animation + win evaluation  
-   - Works with zero internet / no external assets
+### 2. Raw file (download & open in browser)
+https://raw.githubusercontent.com/angellllkr-eng/burning-heart-launcher/main/index.html
 
-2. **Multi-game lobby**  
-   Cards that open free official / public demos of related EGT titles:
-   - 5 Burning Heart (official)
-   - 40 Burning Hot
-   - Flaming Hot
-   - Romanian free demo
-   - SlotCatalog page
-   - Full EGT Digital lobby
-
-## Live it
-
-**Enable GitHub Pages (once):**
-1. Repo → Settings → Pages
+### 3. Permanent nice URL (after you enable Pages once)
+1. Go to repo → Settings → Pages
 2. Source = Deploy from a branch → `main` / root
-3. Save → wait ~60 s
-
-Then open:  
-**https://angellllkr-eng.github.io/burning-heart-launcher/**
-
-Or just download `index.html` and open it locally – the mini-slot works completely offline.
-
-## Notes
-
-- Pure fan / educational project.  
-- Inspired by the real Alphawin.bg game-launch source + CDN 404 you shared.  
-- No real money, no real game assets, no affiliation with Alphawin, Alphabet Gaming, EGT Digital or Amusnet.  
-- 18+ only. Play for fun.
+3. Save → wait 1 min
+4. Then use: **https://angellllkr-eng.github.io/burning-heart-launcher/**
 
 ---
-Made for you by Grok.
+
+## What’s new
+- Real **€** currency display (starts with €1,000.00 FUN money)
+- Bets: €5 / €10 / €25 / €50 / €100
+- Full fancy lobby matching the mockup (sidebar + featured + popular grid)
+- Working offline mini-slot with wilds & 5 lines
+
+**This is 100% demo / FUN money only. No real gambling.**
+
+18+ · Not affiliated with Alphawin, EGT Digital or Alphabet Gaming.
